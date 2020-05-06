@@ -4,7 +4,7 @@ import { TextEdit } from 'vscode';
 import { PositionArray } from '../types';
 import { getPosition } from '../utils/get-position';
 
-export function generateComponent() {
+export function generateComponent(configs: any) {
     const editor = vscode.window.activeTextEditor;
     const schemaText = "\"schemas\": {";
     const componentsText = "\"components\": {";
@@ -43,7 +43,7 @@ export function generateComponent() {
                     const splitClipboard = clipboardText.split(" = ");
                     const evaluatedText = eval('(' + splitClipboard[1] + ')');
                     const schemaName = splitClipboard[0].replace("const", "").trim();
-                    const generatedSchemas = JSON.stringify(componentListGenerator(evaluatedText, schemaName));
+                    const generatedSchemas = JSON.stringify(componentListGenerator(evaluatedText, schemaName, configs));
 
                     return new Promise((resolve, reject) => {
                         if (generatedSchemas) {
