@@ -1,73 +1,115 @@
 import * as vscode from 'vscode';
-import { componentGenerator, componentListGenerator } from '../generators/component-generator';
-import { arrayToObject } from '../utils/array-to-object';
+import { componentListGenerator } from '../generators/component-generator';
 import { TextEdit } from 'vscode';
+import { PositionArray } from '../types';
+import { getPosition } from '../utils/get-position';
 
 export function generateComponent() {
     const editor = vscode.window.activeTextEditor;
-    const documentText = editor && editor.document.getText();
-    let schemaName: string;
-    let schemaDescription: string;
-    let arrayType: "anyOf" | "oneOf" | "allOf";
-    let evaluatedSchemaText: string;
+    const schemaText = "\"schemas\": {";
+    const componentsText = "\"components\": {";
 
-    if (!documentText?.includes("openapi")) {
-        console.log("No OpenAPI spec file detected...");
-        return;
+    if (editor) {
+
+        if (!editor.document.getText()?.includes("openapi")) {
+            console.error("No OpenAPI spec file detected...", editor.document);
+            vscode.window.showWarningMessage("No OpenAPI spec file detected...");
+            return;
+        }
+
+        Promise
+            .all([
+                generateSchemasFromClipboard(),
+                getPositionOfSchemasOrComponents(editor.document)
+            ])
+            .then(([generatedSchemas, positionArray]: [string, PositionArray] | any) => {
+                handleInsertSchema(generatedSchemas, positionArray, editor);
+            })
+            .catch((error: Error) => {
+                console.log(error);
+                vscode.window.showWarningMessage(error.message);
+            });
+
     }
 
-    // Get clipboardText in background
-    vscode.env.clipboard.readText().then((clipboardText: string) => {
-        const splitClipboard = clipboardText.split(" = ");
-        const trimmedText = splitClipboard[1];
-        schemaName = splitClipboard[0].trimStart();
-        const evaluatedText = eval('(' + trimmedText + ')');
-        evaluatedSchemaText = evaluatedText;
-    });
+    function generateSchemasFromClipboard() {
 
-    // Initiate quickPicker for component generation data
-    vscode.window.showInputBox({ ignoreFocusOut: true, placeHolder: "Enter schema name" })
-        .then((name: string | any) => {
-            // schemaName = name;
-            return vscode.window.showInputBox({ ignoreFocusOut: true, placeHolder: "Enter schema description (optional)" });
-        })
-        .then((description: string | any) => {
-            schemaDescription = description;
-            return vscode.window.showQuickPick(["anyOf", "oneOf", "allOf"], { ignoreFocusOut: true, placeHolder: "Enter your default dynamic array type" });
-        })
-        .then((type: string | any) => {
-            arrayType = type;
-            return new Promise((resolve, reject) => resolve());
-        })
-        .then(() => {
-            // console.log({schemaName, schemaDescription, arrayType});
-            const generatedSchemas = componentListGenerator(evaluatedSchemaText, (schemaName || "Filler Schema Name"), { arrayType: "anyOf", ref: true, componentType: "schemas" }, schemaDescription);
+        const clipBoardErrorMessage = "Please make sure to copy a valid Javascript object or array.";
 
-            const lineCountArray = Array.from(Array(editor?.document.lineCount).keys());
-            let lineNumberOfSchemas = lineCountArray.find((lineNumber: number) => {
-                return editor?.document.lineAt(lineNumber).text.includes("\"schemas\": {");
-            });
-            if (lineNumberOfSchemas) {
-                const jsonSchemas = JSON.stringify(generatedSchemas);
-                const text = jsonSchemas.substr(1).substring(0, jsonSchemas.length - 2) + ",";
-                const position = new vscode.Position(lineNumberOfSchemas, 19);
-                const uri = editor?.document.uri;
-                const insertEdit = new vscode.WorkspaceEdit();
+        return vscode.env.clipboard.readText().then(
+            (clipboardText: string) => {
+                try {
 
-                if (uri && editor) {
-                    insertEdit.insert(uri, position, text);
-                    vscode.workspace.applyEdit(insertEdit).then(() => {
-                        vscode.commands.executeCommand("vscode.executeFormatDocumentProvider", uri, editor.options).then(
-                            (formatEdits: TextEdit[] | any) => {
-                                const formatEdit = new vscode.WorkspaceEdit();
-                                formatEdit.set(uri, formatEdits);
-                                vscode.workspace.applyEdit(formatEdit);
-                            }
-                        );
+                    const splitClipboard = clipboardText.split(" = ");
+                    const evaluatedText = eval('(' + splitClipboard[1] + ')');
+                    const schemaName = splitClipboard[0].replace("const", "").trim();
+                    const generatedSchemas = JSON.stringify(componentListGenerator(evaluatedText, schemaName));
+
+                    return new Promise((resolve, reject) => {
+                        if (generatedSchemas) {
+                            resolve(generatedSchemas);
+                        } else {
+                            reject(clipboardText);
+                        }
                     });
-                }
-            }
 
+                } catch (error) {
+
+                    console.log(error);
+                    return new Promise((_, reject) => reject(Error(clipBoardErrorMessage)));
+
+                }
+
+
+            },
+            (error: any) => {
+                console.log(error);
+                return new Promise((_, reject) => reject(Error(clipBoardErrorMessage)));
+            }
+        );
+    }
+
+    function getPositionOfSchemasOrComponents(document: vscode.TextDocument) {
+        return new Promise((resolve, reject) => {
+            const positionRes = getPosition(document, [schemaText, componentsText]);
+
+            if (positionRes instanceof Error) {
+                reject(positionRes);
+            } else {
+                resolve(positionRes);
+            }
         });
+    }
+
+    function insertAndFormatSchema(uri: vscode.Uri, position: vscode.Position, text: string, formatOptions: any) {
+        const insertEdit = new vscode.WorkspaceEdit();
+        insertEdit.insert(uri, position, text);
+        vscode.workspace.applyEdit(insertEdit).then(() => {
+            vscode.commands.executeCommand("vscode.executeFormatDocumentProvider", uri, formatOptions).then(
+                (formatEdits: TextEdit[] | any) => {
+                    const formatEdit = new vscode.WorkspaceEdit();
+                    formatEdit.set(uri, formatEdits);
+                    vscode.workspace.applyEdit(formatEdit);
+                }
+            );
+        });
+    }
+
+    function handleInsertSchema(
+        generatedSchemas: string,
+        positionArray: PositionArray,
+        editor: vscode.TextEditor
+    ) {
+        if (positionArray[1] === schemaText) {
+            const schemaInsert = generatedSchemas.substr(1).substring(0, generatedSchemas.length - 2) + ",";
+            insertAndFormatSchema(editor?.document.uri, positionArray[0], schemaInsert, editor.options);
+        } else if (positionArray[1] === componentsText) {
+            const componentsInsert = "\"schemas\": " + generatedSchemas + ",";
+            insertAndFormatSchema(editor?.document.uri, positionArray[0], componentsInsert, editor.options);
+        } else {
+            const generalInsert = ",\"components\": {" + "\"schemas\": " + generatedSchemas + "}";
+            insertAndFormatSchema(editor?.document.uri, positionArray[0], generalInsert, editor.options);
+        }
+    }
 
 }

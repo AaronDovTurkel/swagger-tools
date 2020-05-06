@@ -3,12 +3,12 @@ import { getType } from "../utils/get-type";
 import { compareObjects } from "../utils/compare-objects";
 import { arrayToObject } from "../utils/array-to-object";
 
-export function componentGenerator(interfaceObj: any, interfaceName: string, componentOptions: IComponentOptions, description?: string) {
+export function componentGenerator(interfaceObj: any, interfaceName: string, componentOptions?: IComponentOptions, description?: string) {
     const { 
         ref = true,
         arrayType = "oneOf",
         componentType = "schemas"
-    } = componentOptions;
+    } = componentOptions || {};
 
     let list: any[] = [];
 
@@ -77,7 +77,7 @@ export function componentGenerator(interfaceObj: any, interfaceName: string, com
     return flatList;
 }
 
-export function componentListGenerator(interfaceObj: any, interfaceName: string, componentOptions: IComponentOptions, description?: string) {
+export function componentListGenerator(interfaceObj: any, interfaceName: string, componentOptions?: IComponentOptions, description?: string) {
     const components = componentGenerator(interfaceObj, interfaceName, componentOptions, description).reverse();
     return arrayToObject(components, "title");
 }
