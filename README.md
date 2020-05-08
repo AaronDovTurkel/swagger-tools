@@ -1,6 +1,6 @@
-# swagger-bot README
+# Swagger Tools README
 
-This is the README for your extension "swagger-bot". After writing up a brief description, we recommend including the following sections.
+This is the README for your extension "swagger-tools". After writing up a brief description, we recommend including the following sections.
 
 ## Features
 
