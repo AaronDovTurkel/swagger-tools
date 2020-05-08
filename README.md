@@ -43,7 +43,7 @@ See the [CHANGELOG](/CHANGELOG.md) for the latest changes.
 3. Place your cursor where you would like to paste your schema
 4. Paste by typing the macro `ctrl/cmd + alt + v`
 
-![Paste Schema Gif](https://github.com/AaronDovTurkel/swagger-tools/blob/master/src/assets/gifs/pasteSchemaTrimmed.gif)
+![Paste Schema Gif](https://github.com/AaronDovTurkel/swagger-tools/blob/master/gifs/pasteSchemaTrimmed.gif)
 
 ## Upcoming Features
 
