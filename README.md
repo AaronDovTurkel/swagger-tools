@@ -1,65 +1,93 @@
-# Swagger Tools README
+# Swagger Tools
 
-This is the README for your extension "swagger-tools". After writing up a brief description, we recommend including the following sections.
+A VSCode extension that helps in generating [openAPI (swagger) specs](https://swagger.io/specification/) from your editor.
+Get it on the [VSCode Marketplace](https://marketplace.visualstudio.com/).
+
+Got any feedback, issues or feature requests? Send them my way via [GitHub Issues](https://github.com/AaronDovTurkel/swagger-tools/issues).
+
+See the [CHANGELOG](/CHANGELOG.md) for the latest changes.
+
+- [Swagger Tools](#swagger-tools)
+  - [Commands](#commands)
+  - [Settings](#settings)
+  - [Features](#features)
+    - [*Generate & Paste Schema Object*](#generate--paste-schema-object)
+  - [Upcoming Features](#upcoming-features)
+    - [*Scaffold New Spec*](#scaffold-new-spec)
+    - [*Generate Components*](#generate-components)
+    - [*Generate Paths*](#generate-paths)
+    - [*More to come...*](#more-to-come)
+  - [Author](#author)
+    - [Contributors](#contributors)
+
+## Commands
+
+| Command name             | Description                                                          | Shortcut             |
+| ------------------------ | -------------------------------------------------------------------- | -------------------- |
+| swagger-tools.pasteSchema| Generates an openAPI schema from an object or array in the clipboard | `ctrl/cmd + alt + v` |
+
+## Settings
+
+`Settings → Extensions → Swagger Tools`
+
+| Setting                 | Description                                       | Allowed Values                           |
+| ----------------------- | ------------------------------------------------- | ---------------------------------------- |
+| swagger-tools.arrayType | Specify the type of array you want auto generated | *"anyOf"*, *"oneOf"*, *"allOf"*, *"not"* |
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+### *Generate & Paste Schema Object*
 
-For example if there is an image subfolder under your extension project workspace:
+1. Copy the object or array you would like to generate
+2. Go to the desired openAPI spec file
+3. Place your cursor where you would like to paste your schema
+4. Paste by typing the macro `ctrl/cmd + alt + v`
 
-\!\[feature X\]\(images/feature-x.png\)
+![Paste Schema Gif](src/assets/gifs/pasteSchemaTrimmed.gif)
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Upcoming Features
 
-## Requirements
+The upcoming features list is order by expected release date...
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+### *Scaffold New Spec*
 
-## Extension Settings
+An easy and quick set up anyone on the team.
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+- Scaffold a new spec from scratch
+- Choose between a complex or basic spec
 
-For example:
+### *Generate Components*
 
-This extension contributes the following settings:
+Select from a list of components to generate fully scaffolded schemas.
+The schemas will be auto inserted in its proper field.
+Setting to make nested objects/arrays referenced in `#/component/schemas`.
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+- schemas
+- responses
+- parameters
+- examples
+- requestBodies
+- headers
+- securitySchemes
+- links
+- callbacks
 
-## Known Issues
+### *Generate Paths*
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+Fully generate paths with all their required fields.
 
-## Release Notes
+- `GET, POST, PUT, PATCH, DELETE`
 
-Users appreciate release notes as you update your extension.
+### *More to come...*
 
-### 1.0.0
+- Auto populate paths with request bodies, params, responses, etc...
+- Linting
+- Error decorators
 
-Initial release of ...
+## Author
 
-### 1.0.1
+Created and sustained by Aaron Turkel (a.k.a. [The Holy Coder](https://github.com/AaronDovTurkel)).
 
-Fixed issue #.
+### Contributors
 
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Have an idea that could make [Swagger Tools](#swagger-tools) better? [Contribute](https://github.com/AaronDovTurkel/swagger-tools)!

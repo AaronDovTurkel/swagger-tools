@@ -1,6 +1,7 @@
 {
 	"name": "swagger-tools",
 	"displayName": "Swagger Tools",
+	"publisher": "TheHolyCoder",
 	"description": "Automating openAPI specs from your editor.",
 	"author": {
 		"name": "Aaron Dov Turkel"
