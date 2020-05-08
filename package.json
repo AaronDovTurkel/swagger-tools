@@ -6,7 +6,7 @@
 	"author": {
 		"name": "Aaron Dov Turkel"
 	},
-	"icon": "src/assets/images/swagger-tools-logo.png",
+	"icon": "./src/assets/images/swagger-tools-logo.png",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/AaronDovTurkel/swagger-tools.git"
