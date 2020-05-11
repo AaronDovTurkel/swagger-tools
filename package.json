@@ -32,7 +32,8 @@
 		"angular"
 	],
 	"activationEvents": [
-		"onCommand:swagger-tools.pasteSchema"
+		"onCommand:swagger-tools.pasteSchema",
+		"onCommand:swagger-tools.addComponent"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -40,12 +41,20 @@
 			{
 				"command": "swagger-tools.pasteSchema",
 				"title": "Paste Schema"
+			},
+			{
+				"command": "swagger-tools.addComponent",
+				"title": "Add Component"
 			}
 		],
 		"menus": {
 			"commandPalette": [
 				{
 					"command": "swagger-tools.pasteSchema",
+					"when": "editorLangId == json"
+				},
+				{
+					"command": "swagger-tools.addComponent",
 					"when": "editorLangId == json"
 				}
 			]
@@ -55,6 +64,12 @@
 				"command": "swagger-tools.pasteSchema",
 				"key": "ctrl+alt+v",
 				"mac": "cmd+alt+v",
+				"when": "editorLangId == json"
+			},
+			{
+				"command": "swagger-tools.addComponent",
+				"key": "ctrl+alt+c",
+				"mac": "cmd+alt+c",
 				"when": "editorLangId == json"
 			}
 		],

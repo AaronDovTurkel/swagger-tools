@@ -1,6 +1,7 @@
 
 import * as vscode from 'vscode';
 import { pasteSchema } from './commands/paste-schema';
+import { addComponent } from './commands/add-component';
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -10,7 +11,12 @@ export function activate(context: vscode.ExtensionContext) {
 		'swagger-tools.pasteSchema', () => pasteSchema()
 	);
 
+	let addComponentDisposable = vscode.commands.registerCommand(
+		'swagger-tools.addComponent', () => addComponent()
+	);
+
 	context.subscriptions.push(pasteSchemaDisposable);
+	context.subscriptions.push(addComponentDisposable);
 }
 
 export function deactivate() {}
