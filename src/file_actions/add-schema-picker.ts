@@ -10,6 +10,8 @@ export function addSchemaPicker() {
 
     let schemaInfo: any = {
         title: undefined,
+        componentType: "schemas",
+        fromClipboard: undefined,
         schemaOptions: {
             arrayType: undefined,
             ref: undefined
@@ -20,27 +22,31 @@ export function addSchemaPicker() {
         vscode.window.showInputBox({ placeHolder: "Enter schema title" })
             .then(
                 (schemaTitle) => {
-                    schemaInfo.title = schemaTitle;
+                    schemaInfo.title = schemaTitle || "GenericSchemaTitle";
                     return vscode.window.showQuickPick(
                         ["Yes", "No"],
                         { placeHolder: "Generate schema from clipboard?" }
                     );
                 },
                 (error) => {
-
+                    console.error(error);
+                    reject("Could not evaluate title input.");
                 }
             )
             .then(
                 (fromClipboard: boolean | any) => {
 
                     if (fromClipboard === "Yes") {
+                        schemaInfo.fromClipboard = true;
                         return generateSchemaOptionsQuickPick();
                     } else {
+                        schemaInfo.fromClipboard = false;
                         return new Promise((resolve) => resolve());
                     }
                 },
                 (error) => {
-
+                    console.error(error);
+                    reject("Could not evaluate clipboard picker option.");
                 }
             )
             .then(
@@ -51,7 +57,8 @@ export function addSchemaPicker() {
                     resolve(schemaInfo);
                 },
                 (error) => {
-
+                    console.error(error);
+                    reject(error);
                 }
             );
     });

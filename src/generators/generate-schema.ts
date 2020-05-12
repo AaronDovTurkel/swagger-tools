@@ -1,7 +1,7 @@
 import { ISchemaOptions, ComponentObjectTuple } from "../types";
 import { compareObjects } from "../utils/compare-objects";
 import { setObjectKey } from "../utils/set-object-key";
-import { createComponentObjectTuple } from "./component-object-tuples";
+import { createComponentObjectTuple } from "../utils/component-object-tuples";
 
 export function generateSchema(
     schemaData: {} | [],
@@ -83,6 +83,7 @@ export function generateSchema(
                 openObj.properties[key] = { $ref: "#/components/schemas/" + entityName };
 
                 refs = [
+                    ...refs,
                     generatedSchema.schema,
                     ...generatedSchema.refs.flat(Infinity)
                 ];
@@ -99,6 +100,7 @@ export function generateSchema(
     }
 
     return componentObjectTuple
-        ? { schema: setObjectKey(schema, componentObjectTuple[0], componentObjectTuple[1]), refs }
+        ? { schema: setObjectKey(schema, componentObjectTuple[0], componentObjectTuple[1]), 
+            refs }
         : { schema, refs };
 }
