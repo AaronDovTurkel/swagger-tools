@@ -1,30 +1,32 @@
 # Swagger Tools
 
-A VSCode extension that helps in generating [openAPI (swagger) specs](https://swagger.io/specification/) from your editor.
-Get it on the [VSCode Marketplace](https://marketplace.visualstudio.com/).
+A VSCode extension that scaffolds [openAPI (swagger) specs](https://swagger.io/specification/) from your editor.
+Get it on the [VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=TheHolyCoder.swagger-tools).
 
 Got any feedback, issues or feature requests? Send them my way via [GitHub Issues](https://github.com/AaronDovTurkel/swagger-tools/issues).
-
-See the [CHANGELOG](/CHANGELOG.md) for the latest changes.
 
 - [Swagger Tools](#swagger-tools)
   - [Commands](#commands)
   - [Settings](#settings)
   - [Features](#features)
     - [*Generate & Paste Schema Object*](#generate--paste-schema-object)
+    - [*Generate Components*](#generate-components)
   - [Upcoming Features](#upcoming-features)
     - [*Scaffold New Spec*](#scaffold-new-spec)
-    - [*Generate Components*](#generate-components)
+    - [*Generate Components Continued...*](#generate-components-continued)
     - [*Generate Paths*](#generate-paths)
     - [*More to come...*](#more-to-come)
   - [Author](#author)
     - [Contributors](#contributors)
 
+See the [CHANGELOG](/CHANGELOG.md) for the latest changes.
+
 ## Commands
 
-| Command name             | Description                                                          | Shortcut             |
-| ------------------------ | -------------------------------------------------------------------- | -------------------- |
-| swagger-tools.pasteSchema| Generates an openAPI schema from an object or array in the clipboard | `ctrl/cmd + alt + v` |
+| Command name               | Description                                                               | Shortcut             |
+| -------------------------- | ------------------------------------------------------------------------- | -------------------- |
+| swagger-tools.pasteSchema  | Generates an openAPI schema from an object or array in the clipboard      | `ctrl/cmd + alt + v` |
+| swagger-tools.addComponent | Adds an openAPI schema into the components spec field (optionally generated from clipboard) | `ctrl/cmd + alt + c` |
 
 ## Settings
 
@@ -32,7 +34,7 @@ See the [CHANGELOG](/CHANGELOG.md) for the latest changes.
 
 | Setting                 | Description                                       | Allowed Values                           |
 | ----------------------- | ------------------------------------------------- | ---------------------------------------- |
-| swagger-tools.arrayType | Specify the type of array you want auto generated | *"anyOf"*, *"oneOf"*, *"allOf"*, *"not"* |
+| swagger-tools.arrayType | Specify the type of array you want auto generated | *"anyOf", "oneOf", "allOf", "not"* |
 
 ## Features
 
@@ -43,7 +45,21 @@ See the [CHANGELOG](/CHANGELOG.md) for the latest changes.
 3. Place your cursor where you would like to paste your schema
 4. Paste by typing the macro `ctrl/cmd + alt + v`
 
-![Paste Schema Gif](https://github.com/AaronDovTurkel/swagger-tools/blob/master/images/pasteSchemaTrimmed.gif?raw=true)
+![Paste Schema - Gif](https://github.com/AaronDovTurkel/swagger-tools/blob/master/images/pasteSchemaTrimmed.gif?raw=true)
+
+### *Generate Components*
+
+Select from a list of components to generate fully scaffolded schemas.
+The schemas will be auto inserted in its proper field.
+
+- #### Schemas
+
+1. Copy the object or array you would like to generate as a component schema
+2. Go to the desired openAPI spec file
+3. Paste by typing the macro `ctrl/cmd + alt + c`
+4. Fill out schema info in command pallette
+
+![Add Component: Schema - Gif](https://github.com/AaronDovTurkel/swagger-tools/blob/master/images/add-component-schema.gif?raw=true)
 
 ## Upcoming Features
 
@@ -51,18 +67,18 @@ The upcoming features list is order by expected release date...
 
 ### *Scaffold New Spec*
 
-An easy and quick set up anyone on the team.
+An easy and quick set up for anyone on the team.
 
 - Scaffold a new spec from scratch
 - Choose between a complex or basic spec
 
-### *Generate Components*
+### *Generate Components Continued...*
 
 Select from a list of components to generate fully scaffolded schemas.
 The schemas will be auto inserted in its proper field.
-Setting to make nested objects/arrays referenced in `#/component/schemas`.
 
-- schemas
+Upcoming Releases:
+
 - responses
 - parameters
 - examples
