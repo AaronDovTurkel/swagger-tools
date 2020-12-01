@@ -1,5 +1,9 @@
 # Swagger Tools
 
+![https://swagger.io/specification/](https://img.shields.io/badge/Learn-181717?style=for-the-badge&logo=swagger)
+![https://swagger.io/specification/](https://img.shields.io/badge/Install-181717?style=for-the-badge&logo=visual-studio-code&color=blueviolet)
+![https://www.patreon.com/aarondovturkel](https://img.shields.io/badge/Donate-181717?style=for-the-badge&logo=patreon&color=blue)
+
 A VSCode extension that scaffolds [openAPI (swagger) specs](https://swagger.io/specification/) from your editor.
 Get it on the [VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=TheHolyCoder.swagger-tools).
 
