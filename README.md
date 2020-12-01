@@ -1,8 +1,7 @@
-# Swagger Tools
-
-![](https://img.shields.io/badge/Learn-181717?link=https://swagger.io/specification/&style=for-the-badge&logo=swagger)
-![](https://img.shields.io/badge/Install-181717?link=https://swagger.io/specification/&style=for-the-badge&logo=visual-studio-code&color=blueviolet)
-[![](ttps://img.shields.io/badge/Donate-181717?link=https://www.patreon.com/join/aarondovturkel/checkout?ru=undefined&style=for-the-badge&logo=patreon&color=blue)](https://www.patreon.com/join/aarondovturkel/checkout?ru=undefined)
+# Swagger Tool
+[![](https://img.shields.io/badge/Learn-181717?link=https://swagger.io/specification/&style=for-the-badge&logo=swagger)](https://swagger.io/specification/)
+[![](https://img.shields.io/badge/Install-181717?link=https://marketplace.visualstudio.com/items?itemName=TheHolyCoder.swagger-tools&style=for-the-badge&logo=visual-studio-code&color=blueviolet)](https://marketplace.visualstudio.com/items?itemName=TheHolyCoder.swagger-tools)
+[![](https://img.shields.io/badge/Donate-181717?link=https://www.patreon.com/join/aarondovturkel/checkout?ru=undefined&style=for-the-badge&logo=patreon&color=blue)](https://www.patreon.com/join/aarondovturkel/checkout?ru=undefined)
 
 A VSCode extension that scaffolds [openAPI (swagger) specs](https://swagger.io/specification/) from your editor.
 Get it on the [VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=TheHolyCoder.swagger-tools).
