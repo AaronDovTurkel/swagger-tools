@@ -1,10 +1,11 @@
 # Swagger Tool
-[![](https://img.shields.io/badge/Learn-181717?link=https://swagger.io/specification/&style=for-the-badge&logo=swagger)](https://swagger.io/specification/)
-[![](https://img.shields.io/badge/Install-181717?link=https://marketplace.visualstudio.com/items?itemName=TheHolyCoder.swagger-tools&style=for-the-badge&logo=visual-studio-code&color=blueviolet)](https://marketplace.visualstudio.com/items?itemName=TheHolyCoder.swagger-tools)
-[![](https://img.shields.io/badge/Donate-181717?link=https://www.patreon.com/join/aarondovturkel/checkout?ru=undefined&style=for-the-badge&logo=patreon&color=blue)](https://www.patreon.com/join/aarondovturkel/checkout?ru=undefined)
+<a href="https://www.buymeacoffee.com/aarondovturkel" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-green.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 A VSCode extension that scaffolds [openAPI (swagger) specs](https://swagger.io/specification/) from your editor.
 Get it on the [VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=TheHolyCoder.swagger-tools).
+
+[![](https://img.shields.io/badge/Learn-181717?link=https://swagger.io/specification/&style=for-the-badge&logo=swagger)](https://swagger.io/specification/)
+[![](https://img.shields.io/badge/Install-181717?link=https://marketplace.visualstudio.com/items?itemName=TheHolyCoder.swagger-tools&style=for-the-badge&logo=visual-studio-code&color=blueviolet)](https://marketplace.visualstudio.com/items?itemName=TheHolyCoder.swagger-tools)
 
 Got any feedback, issues or feature requests? Send them my way via [GitHub Issues](https://github.com/AaronDovTurkel/swagger-tools/issues).
 
