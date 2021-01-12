@@ -26,7 +26,7 @@ export function generateSchema(
         }
         return {
             type: getType(varName),
-            example: `${varName || "Example string"}`
+            example: `${varName}`
         };
     }
 
